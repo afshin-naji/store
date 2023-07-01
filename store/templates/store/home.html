@@ -1,0 +1,62 @@
+{% extends 'store/base.html' %}
+<!-- {% load static %} -->
+
+{% block title %}خانه{% endblock title %}
+
+{% block content %}
+
+<section class="py-5 text-center container" style="margin-top: 5%;">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">کتابخانه</h1>
+        <p class="lead text-muted" dir="rtl"> تو این سایت میتونی بهترین کتاب های دنیا رو در هر دسته بندی که دوست داری پیدا کنی و هر چند تایی که میخوای رو بخری.</p>
+      </div>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center">همه کتاب ها</h2>
+        <br>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for p in products %}
+                    <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="{{ p.image.url }}" alt="تصویر محصول" height="600px" >
+                        <div class="card-body">
+                            <h3>...{{ p.title|slice:15}}</h3>
+                            <p>قیمت: {{ p.price }} تومان</p>
+                            <p>دسته بندی: {{ p.category }}</p>
+                            <p class="card-text">{{ p.short_description|slice:100 }} ...</p>
+                            {% if p.in_stock %}
+                                <small class="text-success">در انبار موجود است</small>
+                            {% else %}
+                                <small class="text-success">در انبار موجود نیست</small>
+                            {% endif %}
+                        
+                        </div>
+                        <a class="btn btn-secondary" type="button" role="button" href="{{ p.get_absolute_url }}">برای خرید کلیک کنید</button></a>
+                    </div>
+                    </div>
+            {% endfor %} 
+        </div>
+        {% if products.has_other_pages %}
+            <div class="text-center" style="margin-top: 5%;">
+                <ul>
+                    {% for i in products.paginator.page_range %}
+                            {% if products.number == i %}
+                                <a  class="btn btn-primary my-2" type="button">{{ i }}</a>
+                            {% else %}
+                                <a  class="btn btn-outline-primary my-2" href="?page={{ i }}" type="button">{{ i }}</a>
+                            {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+    
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends 'store/base.html' %}
+<!-- {% load static %} -->
+
+{% block title %}دسته بندی ها{% endblock title %}
+
+{% block content %}
+
+<div class="album py-5 bg-light" style="margin-top: 10%;">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for p in products %}
+
+                    <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="{{ p.image.url }}" alt="تصویر محصول">
+                        <div class="card-body">
+                            <h3><a href="{{ p.get_absolute_url }}">...{{ p.title|slice:15 }}</a></h3>
+                            <p>قیمت: {{ p.price }} تومان</p>
+                            <p>دسته بندی: {{ p.category }}</p>
+                            <p class="card-text">{{ p.short_description|slice:250 }} ...</p>
+                            {% if p.in_stock %}
+                                <small class="text-success">در انبار موجود است</small>
+                            {% else %}
+                                <small class="text-success">در انبار موجود نیست</small>
+                            {% endif %}
+                        
+                        </div>
+                        <a class="btn btn-secondary" type="button" role="button" href="{{ p.get_absolute_url }}">برای خرید کلیک کنید</button></a>
+                        <!-- <button class="btn btn-secondary" type="button">برای خرید کلیک کنید</button> -->
+                    </div>
+                    </div>
+
+            {% endfor %}
+        </div>  
+    </div>
+</div>
+
+
+{% endblock content %}

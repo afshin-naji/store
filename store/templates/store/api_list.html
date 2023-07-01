@@ -1,0 +1,84 @@
+{% extends 'store/admin_panel_base.html' %}
+
+
+{% block title %}
+    پنل API
+{% endblock title %}
+
+{% block content %}
+
+
+
+<div class="container">
+    <div style="margin-top: 10%;" class="container">
+        <h1 style="margin-bottom: 7%;" class="text-center">لیست API</h1>
+    
+        <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-3 g-3 text-center d-flex justify-content-center">
+            <div class="col">
+                <div class="card border-success mb-3" style="max-width: 25rem">
+                    <a class=" text-center btn btn-success" href="{% url 'api_products' %}"> محصولات</a>
+                    <div class="card-body">
+                        <h5 class="card-title text-success">کتاب ها</h5>
+                        برای نمایش لیست API کتاب ها کلیک کنید.
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card border-primary mb-3" style="max-width: 25rem;">
+                    <a class="btn btn-primary text-center" href="{% url 'api_categories' %}"> دسته بندی ها</a>
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">دسته بندی</h5>
+                        برای نمایش لیست API دسته بندی ها کلیک کنید.
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col">
+                <div class="card border-warning mb-3" style="max-width: 25rem;">
+                    <a class="btn btn-warning text-center" href="{% url 'api_users' %}"> کاربردان</a>
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">کاربر</h5>
+                        برای نمایش لیست API کاربران کلیک کنید.
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-danger mb-3" style="max-width: 25rem;">
+                    <a class="btn btn-danger text-center" href="{% url 'api_comments' %}"> دیدگاه کاربران</a>
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">دیدگاه</h5>
+                        برای نمایش لیست API دیدگاه کاربران کلیک کنید.
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-secondary mb-3" style="max-width: 25rem;">
+                    <a class="btn btn-secondary text-center" href="{% url 'api_request_website' %}"> درخواست کتاب</a>
+                    <div class="card-body">
+                        <h5 class="card-title text-secondary">درخواست کتاب</h5>
+                        برای نمایش API کتاب های درخواست شده کلیک کنید.
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-secondary mb-3" style="max-width: 25rem;">
+                    <a class="btn btn-secondary text-center" href="{% url 'api_request_stock' %}"> درخواست کتاب</a>
+                    <div class="card-body">
+                        <h5 class="card-title text-secondary">درخواست کتاب</h5>
+                        برای نمایش API درخواست کتاب برای انبار کلیک کنید.
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock content %}

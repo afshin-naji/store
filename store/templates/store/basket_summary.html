@@ -1,0 +1,81 @@
+{% extends 'store/base.html' %}
+
+{% block title %}سبد خرید{% endblock title %}
+
+{% block content %}
+
+
+<main class="pt-5" style="margin-top: 5%;">
+    <div class="container">
+      <h1 class="h5" style="margin-bottom: 2%; text-align: center;">سبد خرید شما</h1>
+      {% for item in basket %}
+      {% with product=item.product %}
+        <div data-index="{{product.id}}" class="row mb-4 border product-item">
+            <div class="col-md-3 col-lg-2 order-md-first bg-light">
+                <img class="img-fluid mx-auto d-block" width="120px" alt="Responsive image" src="{{ product.image.url }}">
+                </div>
+                <div class="col-md-9 col-lg-10 ps-md-3 ps-lg-10" style="padding: 1%;">
+                <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-reset">
+                    <h1 class="h5 pt-2">{{ product.title }}</h1>
+                </a>
+                <div class="border" style="margin-bottom: 2%;">
+                    <div class="col border-bottom">
+                        <div class="row p-3">
+                            <div class="col-6">{{ product.author }}</div>
+                            <div class="col-6 text-end"><span class="h6 fw-bold">قیمت: {{ product.price }} تومان </span></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row p-3">
+                            <div class="col-12">
+                                <label for="select" style="margin-bottom: 1%;">تعداد </label>
+                                <span>{{ item.qty }}</span>
+                                <br>
+                                <button type="button" id="delete-button" data-index="{{product.id}}"
+                                    class="btn btn-danger btn-sm delete-button col-12">
+                                    حذف
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      {% endwith %}
+      {% endfor %}
+      <div class="col-12 text-center" style="margin-top: 4%; border: 1px double rgb(206, 200, 200); padding: 2%;">
+        <div class="h6 fw-bold" style="text-align: center;"><p style="font-size: large;">جمع قیمت: </p><div id="subtotal" class="d-inline-flex"> <p style="font-size: large;">{{basket.get_total_price}} تومان </p></div></div>
+        {% if user.is_authenticated %}
+            <a class="btn btn-success col-4 text-center" type="button" role="button" href="#">تایید و پرداخت</button></a>  
+        {% else %}
+            <a class="btn btn-success col-4 text-center" type="button" role="button" href="{% url 'login' %}">تایید و پرداخت</button></a>  
+        {% endif %}
+    </div>
+    </div>
+  </main>
+
+  <script>
+    $(document).on('click', '.delete-button', function(e){
+        e.preventDefault();
+        let productId = $(this).data('index')
+        $.ajax({
+            type:"POST",
+            url:'{% url "basket:basket_delete" %}',
+            data: {
+                productid: $(this).data('index'),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                action: 'delete',
+            },
+            success: function(json){
+                $('.product-item[data-index="'+ productId +'"]').remove();
+                document.getElementById('basket-qty').innerHTML = json.totalqty;
+                document.getElementById('subtotal').innerHTML = json.totalprice;
+            },
+            error: function(xhr, errmsg, err){},
+        });
+    })
+</script>
+
+
+
+{% endblock content %}
