@@ -14,9 +14,13 @@
     </div>
 </section>
 
-<div class="album py-5 bg-light">
+<div style="margin-right: 40%; margin-bottom: 10%;">
+    <img src="../../../media/images/svg/undraw_road_to_knowledge_m8s0(1).svg" alt="" width="50%" height="30%">
+</div>
+    
+<div class="album py-5" >
     <div class="container">
-        <h2 class="text-center">همه کتاب ها</h2>
+        <h2 class="text-center text-light">همه کتاب ها</h2>
         <br>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for p in products %}
@@ -35,7 +39,7 @@
                             {% endif %}
                         
                         </div>
-                        <a class="btn btn-secondary" type="button" role="button" href="{{ p.get_absolute_url }}">برای خرید کلیک کنید</button></a>
+                        <a class="btn btn-success" type="button" role="button" href="{{ p.get_absolute_url }}">برای خرید کلیک کنید</button></a>
                     </div>
                     </div>
             {% endfor %} 
@@ -45,9 +49,9 @@
                 <ul>
                     {% for i in products.paginator.page_range %}
                             {% if products.number == i %}
-                                <a  class="btn btn-primary my-2" type="button">{{ i }}</a>
+                                <a  class="btn btn-success my-2" type="button">{{ i }}</a>
                             {% else %}
-                                <a  class="btn btn-outline-primary my-2" href="?page={{ i }}" type="button">{{ i }}</a>
+                                <a  class="btn btn-outline-success my-2" href="?page={{ i }}" type="button">{{ i }}</a>
                             {% endif %}
                     {% endfor %}
                 </ul>
